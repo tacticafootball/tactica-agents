@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "tactica": {
+      "type": "http",
+      "url": "https://app.tacticafootball.co.uk/x402/mcp"
+    }
+  }
+}
