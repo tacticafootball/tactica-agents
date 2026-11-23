@@ -1,0 +1,12 @@
+{
+  "name": "tactica-x402-example",
+  "private": true,
+  "type": "module",
+  "scripts": { "forecast": "tsx forecast.ts" },
+  "dependencies": {
+    "@x402/evm": "2.32.0",
+    "@x402/fetch": "2.32.0",
+    "viem": "^2.48.11"
+  },
+  "devDependencies": { "@types/node": "^22.10.0", "tsx": "^4.19.0", "typescript": "^5.6.0" }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "uk.co.tacticafootball/tactica",
+  "title": "tactica. football intelligence",
+  "description": "Forecasts and picks: English Premier League (EPL), EFL Championship, EFL League 1 & EFL League 2",
+  "version": "1.0.2",
+  "websiteUrl": "https://tacticafootball.co.uk",
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://app.tacticafootball.co.uk/x402/mcp"
+    }
+  ],
+  "icons": [
+    {
+      "src": "https://app.tacticafootball.co.uk/homepage/tactica_icon_pack/tactica-icon-512.png",
+      "mimeType": "image/png",
+      "sizes": [
+        "512x512"
+      ]
+    }
+  ]
+}
