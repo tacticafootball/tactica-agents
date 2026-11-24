@@ -6,6 +6,7 @@ Football intelligence for the **English Premier League (EPL), EFL Championship, 
 - **HTTP API:** `https://app.tacticafootball.co.uk/x402/v1` (the free catalogue, with current USDC prices)
 - **OpenAPI:** `https://app.tacticafootball.co.uk/openapi.json`
 - **MCP Registry:** `uk.co.tacticafootball/tactica`
+- **For AI agents (prices, MCP, examples):** [tacticafootball.co.uk/agents](https://www.tacticafootball.co.uk/agents?utm_source=github-tactica-agents)
 - **Website:** [tacticafootball.co.uk](https://tacticafootball.co.uk)
 
 This repo holds listing files and examples only. The tactica. service itself isn't open source.
