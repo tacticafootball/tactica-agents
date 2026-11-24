@@ -11,6 +11,16 @@ Football intelligence for the **English Premier League (EPL), EFL Championship, 
 
 This repo holds listing files and examples only. The tactica. service itself isn't open source.
 
+## TRY ONE FREE
+
+One match forecast each round is free: no wallet, no payment. Call `list_fixtures` and look for `"freeSample": true`, then call `get_match_forecast` (MCP) or `GET /x402/v1/forecast/<id>` for that fixture.
+
+```bash
+curl https://app.tacticafootball.co.uk/x402/v1/forecast/<freeSample id>
+```
+
+Or let the Python example find it for you: `python examples/python/tactica_x402.py free`.
+
 ## WHAT YOU CAN ASK FOR
 
 | MCP tool | HTTP route | What you get | Price (USDC) |

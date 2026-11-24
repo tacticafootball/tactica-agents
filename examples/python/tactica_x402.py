@@ -3,6 +3,7 @@
     pip install eth-account==0.13.7
 
     python tactica_x402.py fixtures                      # free: upcoming fixtures and their ids
+    python tactica_x402.py free                          # free: this round's free forecast, no wallet needed
     python tactica_x402.py offer  <fixtureId>            # free: show the x402 payment request, pay nothing
     python tactica_x402.py buy    <fixtureId> --key-file ~/.config/my-agent-wallet.hex --max-usdc 0.25
 
@@ -53,6 +54,17 @@ def list_fixtures():
                                                       'Accept': 'application/json, text/event-stream',
                                                       'MCP-Protocol-Version': '2025-11-25'})
     return json.loads(raw)['result']['structuredContent']['fixtures']
+
+
+def free_forecast():
+    """The round's free sample: find the fixture marked freeSample and fetch it without paying."""
+    sample = next((f for f in list_fixtures() if f.get('freeSample')), None)
+    if sample is None:
+        raise RuntimeError('no free sample this round')
+    status, _, raw = _request(forecast_url(sample['fixtureId']))
+    if status != 200:
+        raise RuntimeError(f'HTTP {status}: {raw.decode()[:300]}')
+    return sample, json.loads(raw)
 
 
 def forecast_url(fixture_id):
@@ -127,6 +139,7 @@ def main():
     parser = argparse.ArgumentParser(description='tactica. x402 example')
     sub = parser.add_subparsers(dest='command', required=True)
     sub.add_parser('fixtures')
+    sub.add_parser('free')
     sub.add_parser('offer').add_argument('fixture_id')
     paid = sub.add_parser('buy')
     paid.add_argument('fixture_id')
@@ -136,7 +149,12 @@ def main():
 
     if args.command == 'fixtures':
         for f in list_fixtures():
-            print(f"{f['kickoffAt']}  {f['league']:<24} {f['homeTeam']} v {f['awayTeam']}  {f['fixtureId']}")
+            free = '  FREE' if f.get('freeSample') else ''
+            print(f"{f['kickoffAt']}  {f['league']:<24} {f['homeTeam']} v {f['awayTeam']}  {f['fixtureId']}{free}")
+    elif args.command == 'free':
+        sample, data = free_forecast()
+        print(f"{sample['homeTeam']} v {sample['awayTeam']} ({sample['kickoffAt']}): free this round")
+        print(json.dumps(data, indent=2))
     elif args.command == 'offer':
         status, request, body = offer(forecast_url(args.fixture_id))
         if request is None:
